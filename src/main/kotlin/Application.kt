@@ -27,18 +27,17 @@ fun Application.module() {
     }
 
     routing {
-        swaggerUI(path = "docs") { forwardRoot = true }
+        swaggerUI(path = "docs", swaggerFile = "openapi/documentation.yaml")
         get("/health") { call.respondText("OK") }
+
         // sample endpoints for demonstration
         route("/v1") {
             route("/shops/{shopId}") {
                 route("/menu") {
-                    get("/products") {
-                        call.respond(listOf<ProductOut>()) // placeholder
-                    }
+                    get("/products") { call.respond(sampleMenu()) }
                     post("/products") {
                         val req = call.receive<CreateProductReq>()
-                        call.respond(ProductOut("p_${req.name.lowercase()}", req.name, req.description))
+                        call.respond(ProductOut("p_" + req.name.lowercase(), req.name, req.description))
                     }
                 }
                 route("/orders") {
@@ -56,9 +55,16 @@ fun Application.module() {
     }
 }
 
+// DTOs / stub data classes
 @Serializable data class CreateProductReq(val name: String, val description: String? = null)
 @Serializable data class ProductOut(val id: String, val name: String, val description: String? = null)
+
 @Serializable data class CreateOrderReq(val items: List<OrderItemIn>)
 @Serializable data class OrderItemIn(val variantId: String, val qty: Int)
 @Serializable data class CreateOrderRes(val orderId: String, val totalCents: Int)
 @Serializable data class OrderOut(val id: String, val totalCents: Int, val status: String)
+
+fun sampleMenu(): List<ProductOut> = listOf(
+    ProductOut("p_espresso", "Espresso", "Single shot"),
+    ProductOut("p_cappuccino", "Cappuccino", "Milk foam")
+)
