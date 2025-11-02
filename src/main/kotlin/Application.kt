@@ -5,12 +5,12 @@ import io.ktor.server.netty.EngineMain
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.plugins.cors.routing.*
-import io.ktor.server.plugins.callloging.*
+import io.ktor.server.plugins.calllogging.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.request.*
 import io.ktor.server.routing.*
-import io.ktor.server.swagger.*
+import io.ktor.server.plugins.swagger.*
 import kotlinx.serialization.Serializable
 
 fun main(args: Array<String>) = EngineMain.main(args)
