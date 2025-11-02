@@ -11,10 +11,14 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.plugins.swagger.*
 import api.registerV1Routes
+import db.DatabaseFactory
 
 fun main(args: Array<String>) = EngineMain.main(args)
 
 fun Application.module() {
+    // Initialize database connection
+    DatabaseFactory.init(environment)
+
     install(ContentNegotiation) { json() }
     install(CallLogging)
     install(CORS) { anyHost(); allowNonSimpleContentTypes = true }
