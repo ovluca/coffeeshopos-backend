@@ -19,8 +19,3 @@ data class CreateOrderRes(val orderId: String, val totalCents: Int)
 
 @Serializable
 data class OrderOut(val id: String, val totalCents: Int, val status: String)
-
-fun sampleMenu(): List<ProductOut> = listOf(
-    ProductOut("p_espresso", "Espresso", "Single shot"),
-    ProductOut("p_cappuccino", "Cappuccino", "Milk foam")
-)
