@@ -11,7 +11,7 @@ fun Route.registerV1Routes() {
         route("/shops/{shopId}") {
             route("/menu") {
                 get("/products") {
-                    call.respond(sampleMenu())
+                    call.respond(emptyList<ProductOut>())
                 }
                 post("/products") {
                     val req = call.receive<CreateProductReq>()
