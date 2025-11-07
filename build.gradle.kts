@@ -22,13 +22,16 @@ dependencies {
     implementation("io.ktor:ktor-server-websockets:$ktor")
     implementation("io.ktor:ktor-server-swagger:$ktor")
 
-    // Database dependencies
+    // Database dependencies (PostgreSQL/Exposed, may remain for reference)
     implementation("org.jetbrains.exposed:exposed-core:0.55.0")
     implementation("org.jetbrains.exposed:exposed-dao:0.55.0")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.55.0")
     implementation("com.zaxxer:HikariCP:5.1.0")
     implementation("org.postgresql:postgresql:42.7.4")
     implementation("org.flywaydb:flyway-core:10.10.0")
+
+    // MongoDB dependencies
+    implementation("org.litote.kmongo:kmongo-coroutine-serialization:4.9.0")
 
     testImplementation(kotlin("test"))
 }
