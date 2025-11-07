@@ -10,6 +10,7 @@ import java.util.UUID
 
 fun Route.registerV1Routes() {
     val menuRepo = MongoMenuRepository()
+
     route("/v1") {
         route("/shops/{shopId}") {
             route("/menu") {
