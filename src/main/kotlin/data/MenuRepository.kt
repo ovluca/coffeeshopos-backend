@@ -2,13 +2,13 @@ package data
 
 import domain.ProductOut
 import org.jetbrains.exposed.sql.insertAndGetId
-import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.UUID
 
 class MenuRepository {
     fun listProducts(shopId: UUID): List<ProductOut> = transaction {
-        ProductsTable.select { ProductsTable.shopId eq shopId }.map {
+        ProductsTable.selectAll().where { ProductsTable.shopId eq shopId }.map {
             ProductOut(
                 id = it[ProductsTable.id].value.toString(),
                 name = it[ProductsTable.name],
