@@ -5,11 +5,11 @@ import io.ktor.server.routing.*
 import io.ktor.server.response.*
 import io.ktor.server.request.*
 import domain.*
-import data.MenuRepository
+import data.MongoMenuRepository
 import java.util.UUID
 
 fun Route.registerV1Routes() {
-    val menuRepo = MenuRepository()
+    val menuRepo = MongoMenuRepository()
     route("/v1") {
         route("/shops/{shopId}") {
             route("/menu") {
