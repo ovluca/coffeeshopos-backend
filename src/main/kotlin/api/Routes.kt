@@ -5,17 +5,24 @@ import io.ktor.server.routing.*
 import io.ktor.server.response.*
 import io.ktor.server.request.*
 import domain.*
+import data.MenuRepository
+import java.util.UUID
 
 fun Route.registerV1Routes() {
+    val menuRepo = MenuRepository()
     route("/v1") {
         route("/shops/{shopId}") {
             route("/menu") {
                 get("/products") {
-                    call.respond(emptyList<ProductOut>())
+                    val shopId = call.parameters["shopId"]!!
+                    val products = menuRepo.listProducts(UUID.fromString(shopId))
+                    call.respond(products)
                 }
                 post("/products") {
+                    val shopId = call.parameters["shopId"]!!
                     val req = call.receive<CreateProductReq>()
-                    call.respond(ProductOut("p_${req.name.lowercase()}", req.name, req.description))
+                    val product = menuRepo.createProduct(UUID.fromString(shopId), req.name, req.description)
+                    call.respond(product)
                 }
             }
             route("/orders") {
